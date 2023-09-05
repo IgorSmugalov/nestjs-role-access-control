@@ -1,16 +1,12 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
 } from '@nestjs/common';
-import { UserService } from './user.service';
-import { CreateUserDTO } from './dto/create-user.dto';
-import { UpdateUserDTO } from './dto/update-user.dto';
-import { UserIdDTO } from './dto/params.dto';
 import {
   ApiCreatedResponse,
   ApiOkResponse,
@@ -18,7 +14,11 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { UseRequestValidation } from 'src/lib/validation';
+import { CreateUserDTO } from './dto/create-user.dto';
+import { UserIdDTO } from './dto/params.dto';
+import { UpdateUserDTO } from './dto/update-user.dto';
 import { UserEntity } from './entities/user.entity';
+import { UserService } from './user.service';
 
 @Controller('user')
 @ApiTags('User')

@@ -2,7 +2,7 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from 'src/database';
 import { CreateUserDTO } from './dto/create-user.dto';
-import { UserIdDTO } from './dto/params.dto';
+import { UserEmailDTO, UserIdDTO } from './dto/params.dto';
 import { UpdateUserDTO } from './dto/update-user.dto';
 import {
   UserAlreadyExistsException,
@@ -29,9 +29,11 @@ export class UserService {
     }
   }
 
-  async findOne(id: UserIdDTO) {
+  async findOne(uniqueFieldDto: UserIdDTO | UserEmailDTO) {
     try {
-      return await this.prismaService.user.findUniqueOrThrow({ where: id });
+      return await this.prismaService.user.findUniqueOrThrow({
+        where: uniqueFieldDto,
+      });
     } catch (error) {
       this.parsePrismaUserError(error);
     }

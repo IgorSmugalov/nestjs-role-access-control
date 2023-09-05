@@ -13,3 +13,7 @@ export type UpdateUserInput = Partial<
 export type UserId = Prisma.UserGetPayload<{
   select: { id: true };
 }>;
+
+export type UserEmail = Prisma.UserGetPayload<{
+  select: { email: true };
+}>;
