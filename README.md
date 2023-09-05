@@ -1,15 +1,20 @@
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
+<h1 align="center">[WIP] Access Control Module For NestJs</h1>
 
-# Description
+CASL integration with NestJS.
 
-[Nest](https://github.com/nestjs/nest) for local development with Prisma, PostgreSQL, Docker
+More flexible and integrated approach, than suggested by the Nest documentation:
 
-| Branch    | Options                                                  |
-| --------- | -------------------------------------------------------- |
-| main      | docker-compose with: Postgres, PgAdmin                   |
-| with-node | docker-compose with: Node, Postgres, PgAdmin + HotReload |
+- Permissions defined separately for each module
+- In separate module permissions defined in one place with short and readable form
+- Access must be controlled by:
+  - Role
+  - Condition (e.g. user is owner of resource)
+  - Permitted fields of resourse (Different roles can have full or partial access to modify resource)
+  - Combination of the above
+- Сonfigurable Guard for every protected endpoint
 
 # Usage
 
@@ -29,39 +34,7 @@ $ npx prisma generate
 - docker
 - docker-compose
 
-# Access
-
-## Nest App
-
-- **API**: [http://localhost:3000](http://localhost:3000)
-
-## Swagger
-
-- **Doc**: [http://localhost:3000/api](http://localhost:3000/api)
-
-## Postgres:
-
-- `localhost:5432`
-- **Username:** postgres
-- **Password:** password
-
-## PgAdmin:
-
-- **URL:** [http://localhost:5433](http://localhost:5433)
-- **Username:** admin@localhost.com
-- **Password:** root
-
 # Environments
 
 This Compose file contains environment variables, stored in `.env`
 
-## Postgres ENV
-
-- `POSTGRES_DB` default value: **database**
-- `POSTGRES_USER` default value: **postgres**
-- `POSTGRES_PASSWORD` default value: **password**
-
-## PgAdmin ENV
-
-- `PGADMIN_DEFAULT_EMAIL` default value: **admin@localhost.com**
-- `PGADMIN_DEFAULT_PASSWORD` default value: **root**
