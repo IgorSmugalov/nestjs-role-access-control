@@ -13,7 +13,6 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { UseRequestValidation } from 'src/lib/validation';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { UserIdDTO } from './dto/params.dto';
 import { UpdateUserDTO } from './dto/update-user.dto';
@@ -22,7 +21,6 @@ import { UserService } from './user.service';
 
 @Controller('user')
 @ApiTags('User')
-@UseRequestValidation()
 export class UserController {
   constructor(private readonly userService: UserService) {}
 

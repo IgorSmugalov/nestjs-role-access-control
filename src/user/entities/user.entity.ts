@@ -7,6 +7,7 @@ import {
   IsEnum,
   IsNumber,
   IsString,
+  MinLength,
 } from 'class-validator';
 
 export class UserEntity implements User {
@@ -23,6 +24,7 @@ export class UserEntity implements User {
 
   @Expose()
   @IsString()
+  @MinLength(3)
   @ApiProperty({ example: 'John' })
   name: string;
 

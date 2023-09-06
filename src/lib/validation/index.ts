@@ -1,1 +1,1 @@
-export { UseRequestValidation } from './use-request-validation.decorator';
+export { GlobalValidationPipe } from './use-request-validation.decorator';

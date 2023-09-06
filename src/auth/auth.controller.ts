@@ -1,7 +1,6 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CredentialsDTO } from './dto/credentials.dto';
-import { UseRequestValidation } from 'src/lib/validation';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { AuthResponseDTO } from './dto/auth-response.dto';
 
@@ -9,7 +8,6 @@ import { AuthResponseDTO } from './dto/auth-response.dto';
 
 @Controller('auth')
 @ApiTags('Auth')
-@UseRequestValidation()
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
