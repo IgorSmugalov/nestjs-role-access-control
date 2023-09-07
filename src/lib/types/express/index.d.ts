@@ -1,4 +1,4 @@
-import { AuthenticatedUserDTO } from 'src/auth/dto/authenticated-user.dto';
+import { AuthenticatedUserDTO } from 'src/auth';
 
 export {};
 

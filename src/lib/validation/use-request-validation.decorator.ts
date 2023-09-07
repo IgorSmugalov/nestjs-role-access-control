@@ -10,6 +10,7 @@ export class GlobalValidationPipe extends ValidationPipe {
       whitelist: true,
       validateCustomDecorators: true,
       stopAtFirstError: true,
+      transformOptions: { exposeUnsetFields: false },
     });
   }
 }
