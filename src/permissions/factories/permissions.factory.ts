@@ -9,11 +9,7 @@ import * as extra from '@casl/ability/extra';
 import { Inject, Injectable } from '@nestjs/common';
 import { AuthenticatedUserDTO } from 'src/auth';
 import { PERMISSIONS_FEATURE_OPTIONS } from '../permissions.const';
-import {
-  AppAbility,
-  AppActions,
-  ModuleOptionsForFeature,
-} from '../permissions.interface';
+import { AppAbility, ModuleOptionsForFeature } from '../permissions.interface';
 
 @Injectable()
 export class PermissionsFactory {
@@ -47,7 +43,7 @@ export class PermissionsFactory {
 
   definePermittedFieldForAbility(
     ability: AppAbility,
-    action: AppActions,
+    action: string,
     subject: Subject,
   ) {
     return extra.permittedFieldsOf(ability, action, subject, {

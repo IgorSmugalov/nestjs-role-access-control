@@ -1,4 +1,4 @@
-import { AnyClass } from '@casl/ability/dist/types/types';
+import { AnyClass, AnyObject } from '@casl/ability/dist/types/types';
 import {
   CanActivate,
   ExecutionContext,
@@ -12,11 +12,7 @@ import { plainToInstance } from 'class-transformer';
 import { Request } from 'express';
 import { PERMISSIONS_GUARD_CONFIG } from './permissions.const';
 import { AccessForbiddenException } from './permissions.exceptions';
-import {
-  AppActions,
-  PermissionGuardOptions,
-  SubjectHook,
-} from './permissions.interface';
+import { PermissionGuardOptions, SubjectHook } from './permissions.interface';
 import { PermissionService } from './permissions.service';
 import { subjectHookFactory } from './factories/subject-hook.factory';
 
@@ -39,23 +35,41 @@ export class PermissionsGuard implements CanActivate {
     if (!user || user.roles.length === 0) throw new AccessForbiddenException();
     if (user.roles.includes('root')) return true;
 
-    const factory = await subjectHookFactory(this.moduleRef, subjectHook);
+    let canActivate = false;
 
-    const subjectInstance = plainToInstance(
-      subjectClass,
-      await factory.getSubjectData(request),
-    );
+    if (subjectHook) {
+      const factory = await subjectHookFactory(this.moduleRef, subjectHook);
+      let { subject, enrichedSubject } = await factory.getSubjectData(request);
 
-    if (this.accessService.canAccess(user, action, subjectInstance))
-      return true;
+      subject = this.buildSubjectInstance(subjectClass, subject);
+
+      enrichedSubject = this.buildSubjectInstance(
+        subjectClass,
+        enrichedSubject,
+      );
+
+      canActivate = this.accessService.canAccess(
+        user,
+        action,
+        subject,
+        enrichedSubject,
+      );
+    } else {
+      canActivate = this.accessService.canAccess(user, action, subjectClass);
+    }
+    if (canActivate) return true;
     throw new AccessForbiddenException();
+  }
+
+  private buildSubjectInstance(subjectClass: AnyClass, object: AnyObject) {
+    return plainToInstance(subjectClass, object, { exposeUnsetFields: false });
   }
 }
 
 export function UsePermissionsGuard(
-  action: AppActions,
+  action: string,
   subjectClass: AnyClass,
-  subjectHook: AnyClass<SubjectHook>,
+  subjectHook?: AnyClass<SubjectHook>,
 ) {
   return applyDecorators(
     SetMetadata<string, PermissionGuardOptions>(PERMISSIONS_GUARD_CONFIG, {
