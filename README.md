@@ -1,9 +1,7 @@
-<p align="center">
+<!-- <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-<h1 align="center">[WIP] Access Control Module For NestJs</h1>
-
-CASL integration with NestJS.
+</p> -->
+<h1 align="center">[WIP] </br>Access Control Module For NestJs </br>CASL + NestJS</h1>
 
 More flexible and integrated approach, than suggested by the Nest documentation:
 
@@ -37,4 +35,3 @@ $ npx prisma generate
 # Environments
 
 This Compose file contains environment variables, stored in `.env`
-
