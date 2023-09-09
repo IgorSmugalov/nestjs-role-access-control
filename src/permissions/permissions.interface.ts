@@ -31,7 +31,7 @@ export interface PermissionGuardOptions {
 
 export interface HookSubjectsSet {
   subject: Record<string, any>;
-  enrichedSubject: Record<string, any>;
+  enrichedSubject?: Record<string, any>;
 }
 
 export interface SubjectHook {
