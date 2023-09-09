@@ -4,7 +4,7 @@ import { PermissionsFactory } from './factories/permissions.factory';
 import { AuthenticatedUserDTO } from 'src/auth';
 @Injectable()
 export class PermissionService {
-  constructor(private abilityFactory: PermissionsFactory) {}
+  constructor(private permissionFactory: PermissionsFactory) {}
 
   /**
    * @param {AuthenticatedUserDTO} user - authenticated user from JWT
@@ -26,14 +26,14 @@ export class PermissionService {
   ): boolean {
     if (!user || !action || !subject) return false;
 
-    const abilities = this.abilityFactory.defineAbilityForUser(user);
+    const abilities = this.permissionFactory.defineAbilityForUser(user);
 
     // Gets list of permitted fields for action
     const permittedFieldsOfAbility =
-      this.abilityFactory.definePermittedFieldForAbility(
+      this.permissionFactory.definePermittedFieldForAbility(
         abilities,
         action,
-        subject,
+        enrichedSubject,
       );
 
     // If permitted fields is defined - check every field
