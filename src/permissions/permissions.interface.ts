@@ -3,16 +3,10 @@ import { AnyClass } from '@casl/ability/dist/types/types';
 import { Role } from '@prisma/client';
 import { Request } from 'express';
 import { AuthenticatedUserDTO } from 'src/auth';
-// export enum AppActions {
-//   READ = 'read',
-//   CREATE = 'create',
-//   UPDATE = 'update',
-//   DELETE = 'delete',
-// }
 
 /**
  * root role excluded because it's can do any action, see permissions guard
- * everyone for adding permissions regardless of role
+ * everyone used for adding permissions regardless of role
  */
 export type Roles = Exclude<Role, 'root'> | 'everyone';
 

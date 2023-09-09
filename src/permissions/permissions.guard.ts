@@ -32,17 +32,23 @@ export class PermissionsGuard implements CanActivate {
     const request: Request = context.switchToHttp().getRequest();
     const { user } = request;
 
+    // request.user === null or user.roles empty - throw error
     if (!user || user.roles.length === 0) throw new AccessForbiddenException();
+
+    // root has unrestricted access
     if (user.roles.includes('root')) return true;
 
     let canActivate = false;
 
+    // subjectHook uses for permissions with conditions checks
     if (subjectHook) {
       const factory = await subjectHookFactory(this.moduleRef, subjectHook);
       let { subject, enrichedSubject } = await factory.getSubjectData(request);
 
+      // subject from request, contains data from request only (from body, params, query or it's combination)
       subject = this.buildSubjectInstance(subjectClass, subject);
 
+      // same subject, but getted from database and contains additional data
       enrichedSubject = this.buildSubjectInstance(
         subjectClass,
         enrichedSubject,
@@ -55,6 +61,7 @@ export class PermissionsGuard implements CanActivate {
         enrichedSubject,
       );
     } else {
+      // subjectHook not used and specific subject instance not defined, conditions cheks not supported
       canActivate = this.accessService.canAccess(user, action, subjectClass);
     }
     if (canActivate) return true;

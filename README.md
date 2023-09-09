@@ -14,7 +14,7 @@ More flexible and integrated approach, than suggested by the Nest documentation:
   - Combination of the above
 - Сonfigurable Guard for every protected endpoint
 
-# Usage
+# Installation
 
 - Clone this repository
 - Run:
@@ -25,6 +25,10 @@ $ docker-compose up -d
 $ npm run start:dev
 $ npx prisma generate
 ```
+
+# How use:
+
+[WIP]
 
 # Requirements:
 
