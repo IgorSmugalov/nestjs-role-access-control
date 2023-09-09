@@ -12,9 +12,9 @@ import {
 
 export class UserEntity implements User {
   @Expose()
-  @Type(() => Number)
   @IsNumber()
   @ApiProperty({ uniqueItems: true })
+  @Type(() => Number)
   id: number;
 
   @Expose()
