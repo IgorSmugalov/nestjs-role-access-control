@@ -8,6 +8,7 @@ import {
   Post,
 } from '@nestjs/common';
 import {
+  ApiBearerAuth,
   ApiCreatedResponse,
   ApiOkResponse,
   ApiOperation,
@@ -37,6 +38,7 @@ export class UserController {
 
   @Get()
   @UsePermissionsGuard(UserActions.getAll, UserEntity)
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Get all Users' })
   @ApiOkResponse({ type: [UserEntity] })
   async findAll() {
@@ -45,6 +47,7 @@ export class UserController {
 
   @Get(':id')
   @UsePermissionsGuard(UserActions.getById, UserIdDTO, UserIdHook)
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Get unique user' })
   @ApiOkResponse({ type: UserEntity })
   async findOne(@Param() idDto: UserIdDTO) {
@@ -53,6 +56,7 @@ export class UserController {
 
   @Patch(':id')
   @UsePermissionsGuard(UserActions.update, UserEntity, UserEntityHook)
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Update user' })
   @ApiOkResponse({ type: UserEntity })
   async update(
@@ -65,6 +69,7 @@ export class UserController {
 
   @Delete(':id')
   @UsePermissionsGuard(UserActions.delete, UserEntity, UserEntityHook)
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Delete user' })
   @ApiOkResponse({ type: UserEntity })
   async remove(@Param() idDto: UserIdDTO) {

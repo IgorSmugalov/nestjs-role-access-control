@@ -29,6 +29,10 @@ $ npm run start:dev
 $ npx prisma generate
 ```
 
+# API
+
+[Swagger](http://localhost:3000/api)
+
 # How use:
 
 [WIP]
