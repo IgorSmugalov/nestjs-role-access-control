@@ -167,6 +167,7 @@ can(Update, UserEntity, ['roles'], {
 ```
 
 - add validation into subjectHook, based on class-validator
+- more informative error messages
 
 # Requirements:
 
