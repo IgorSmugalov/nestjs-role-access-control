@@ -25,8 +25,18 @@ The idea was borrowed from [nest-casl](https://github.com/getjerry/nest-casl) wi
 ```bash
 $ npm i
 $ docker-compose up -d
+$ npx prisma migrate
 $ npm run start:dev
-$ npx prisma generate
+```
+
+During installation, test users with different roles are created in the database
+
+In this example, a password is not used for authorization
+
+To manage records in the database run the next command and use tabular interface: http://localhost:5555
+
+```bash
+$ npx prisma studio
 ```
 
 # API
